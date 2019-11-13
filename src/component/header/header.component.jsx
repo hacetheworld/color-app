@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
+
 import Slider from 'rc-slider';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -47,7 +49,7 @@ class Header extends Component {
         return (
             <header className='navbar'>
                 <div className='logo'>
-                    <a href='/'> Color-App</a>
+                    <Link to='/'>Color-App</Link>
 
                 </div>
 
