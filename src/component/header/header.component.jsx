@@ -2,7 +2,10 @@ import React, { Component } from 'react'
 import Slider from 'rc-slider';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
+import Snackbar from '@material-ui/core/Snackbar';
+import IconButton from '@material-ui/core/IconButton';
 
+import CloseIcon from '@material-ui/icons/Close';
 import 'rc-slider/assets/index.css';
 import './header.style.css';
 
@@ -13,13 +16,22 @@ class Header extends Component {
         super(props);
 
         this.state = {
-            format: 'hex'
+            format: 'hex',
+            open: false
         }
     }
 
-    handleChange = (e) => {
+    // handleClick = () => {
+    //     setOpen(true);
+    // };
 
-        this.setState({ format: e.target.value }, () => {
+    handleClose = () => {
+        this.setState({ open: false })
+    }
+
+    handleFormatChange = (e) => {
+
+        this.setState({ format: e.target.value, open: true }, () => {
             this.props.handleChange(this.state.format);
         })
 
@@ -29,7 +41,7 @@ class Header extends Component {
     render() {
 
         const { level, changeLevel } = this.props
-        const { format } = this.state;
+        const { format, open } = this.state;
 
 
         return (
@@ -52,7 +64,7 @@ class Header extends Component {
                     </div>
                 </div>
                 <div className='select-container'>
-                    <Select value={format} onChange={this.handleChange}>
+                    <Select value={format} onChange={this.handleFormatChange}>
                         <MenuItem value='hex' >HEX-#fff
             </MenuItem>
                         <MenuItem value='rgb' >RGB-rgb(255,255,255)
@@ -62,6 +74,29 @@ class Header extends Component {
                     </Select>
                 </div>
 
+                <Snackbar
+                    anchorOrigin={{
+                        vertical: 'bottom',
+                        horizontal: 'left',
+                    }}
+                    open={open}
+                    autoHideDuration={4000}
+                    onClose={this.handleClose}
+                    ContentProps={{
+                        'aria-describedby': 'message-id',
+                    }}
+                    message={<span id="message-id">Format Changed to {format}</span>}
+                    action={[
+                        <IconButton
+                            key="close"
+                            aria-label="close"
+                            color="inherit"
+                            onClick={this.handleClose}
+                        >
+                            <CloseIcon />
+                        </IconButton>,
+                    ]}
+                />
             </header>
         )
     }
