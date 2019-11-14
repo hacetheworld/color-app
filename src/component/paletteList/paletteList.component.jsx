@@ -3,7 +3,7 @@ import MiniPalette from '../miniPalette/miniPalette.component'
 import './paletteList.style.css';
 import { withStyles } from '@material-ui/styles';
 
-import { Link } from 'react-router-dom'
+
 
 
 const styles = {
