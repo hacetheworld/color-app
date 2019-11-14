@@ -42,7 +42,7 @@ class Header extends Component {
 
     render() {
 
-        const { level, changeLevel } = this.props
+        const { level, changeLevel, showSlider } = this.props
         const { format, open } = this.state;
 
 
@@ -53,7 +53,7 @@ class Header extends Component {
 
                 </div>
 
-                <div className='slider-conatiner'>
+                {showSlider && (<div className='slider-conatiner'>
                     <span>Level:{level}</span>
                     <div className='slider'>
                         <Slider
@@ -64,7 +64,7 @@ class Header extends Component {
                             step={100} />
 
                     </div>
-                </div>
+                </div>)}
                 <div className='select-container'>
                     <Select value={format} onChange={this.handleFormatChange}>
                         <MenuItem value='hex' >HEX-#fff
