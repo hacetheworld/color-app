@@ -7,7 +7,7 @@ import PaletteList from './component/paletteList/paletteList.component';
 import SeedColors from './SeedColor';
 import { generatePalette } from './colorHelper';
 
-import NewPaletteForm from './component/newPaletteForm/newPalette.component';
+import NewPaletteForm from './component/newPaletteForm/newPaletteForm.component';
 
 class App extends Component {
 
