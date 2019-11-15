@@ -4,6 +4,27 @@ import ColorBox from '../colorBox/colorBox.component'
 
 import Header from '../header/header.component';
 import PaletteFooter from '../palette/paletteFooter.component'
+import { withStyles } from '@material-ui/styles'
+
+
+const styles = {
+    Palette: {
+        height: "100vh",
+        display: "flex",
+        flexDirection: "column"
+    },
+
+    PaletteColors: {
+        height: " 90%",
+        display: "grid",
+        gridTemplateColumns: "repeat(auto-fill, minmax(250px, 1fr))",
+    },
+    goBack: {
+
+    }
+
+
+}
 
 
 class SingleColorPalette extends Component {
@@ -37,6 +58,7 @@ class SingleColorPalette extends Component {
 
     render() {
         const { paletteName, emoji, id } = this.props.palette;
+        const { classes } = this.props;
 
         const { format } = this.state;
         const colorBoxes = this._shades.map(color => (
@@ -49,9 +71,9 @@ class SingleColorPalette extends Component {
             />
         ))
         return (
-            <div className='SingleColorPalette Palette'>
+            <div className={` SingleLayerPalette ${classes.Palette}`}>
                 <Header handleChange={this.changeFormat} showSlider={false} />
-                <div className='Palette-colors'>
+                <div className={classes.PaletteColors}>
                     {colorBoxes}
                     <div className='goBack ColorBox'>
                         <Link to={`/palette/${id}`} className=' back-button'>Go Back</Link>
@@ -66,4 +88,4 @@ class SingleColorPalette extends Component {
 }
 
 
-export default SingleColorPalette;
+export default withStyles(styles)(SingleColorPalette);

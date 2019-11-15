@@ -3,7 +3,29 @@ import ColorBox from '../colorBox/colorBox.component'
 import Header from '../header/header.component'
 import PaletteFooter from './paletteFooter.component'
 import './palette.style.css';
-export default class Palette extends Component {
+import { withStyles } from '@material-ui/styles'
+
+
+const styles = {
+    Palette: {
+        height: "100vh",
+        display: "flex",
+        flexDirection: "column"
+    },
+
+    PaletteColors: {
+        height: " 90%",
+        display: "grid",
+        gridTemplateColumns: "repeat(auto-fill, minmax(250px, 1fr))",
+    }
+
+}
+
+
+
+
+
+class Palette extends Component {
 
     constructor(props) {
         super(props);
@@ -23,6 +45,8 @@ export default class Palette extends Component {
     render() {
         const { colors, paletteName, emoji, id } = this.props.palette;
 
+        const { classes } = this.props;
+
         const { level, format } = this.state;
 
         const colorBoxes = colors[level].map(color => (
@@ -36,10 +60,10 @@ export default class Palette extends Component {
             />
         ))
         return (
-            <div className='Palette'>
+            <div className={classes.Palette}>
                 <Header level={level} handleChange={this.changeFormat} changeLevel={this.changeLevel} showSlider={true} />
 
-                <div className='Palette-colors'>
+                <div className={classes.PaletteColors}>
                     {colorBoxes}
                 </div>
 
@@ -48,3 +72,7 @@ export default class Palette extends Component {
         )
     }
 }
+
+
+
+export default withStyles(styles)(Palette)

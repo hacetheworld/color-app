@@ -32,13 +32,13 @@ class ColorBox extends Component {
 
                     <div style={{ background }} className={`copy-overlay ${this.state.isCopied ? 'show' : ''}`}></div>
                     <div className={`copy-message ${this.state.isCopied ? 'show' : ''}`}>
-                        <h1 className={!isDarkColor && 'black-text'}>Copied!</h1>
-                        <p className={!isDarkColor && 'black-text'}> {background}</p>
+                        <h1 className={`' ' ${!isDarkColor && 'black-text'}`}>Copied!</h1>
+                        <p className={`' ' ${!isDarkColor && 'black-text'}`}> {background}</p>
                     </div>
 
                     <div className='copy-container'>
                         <div className='box-content'>
-                            <span className={isDarkColor && 'light-text'}>{name}</span>
+                            <span className={`' ' ${isDarkColor && 'light-text'}`}>{name}</span>
                         </div>
                         <button className={`copy-button ${!isDarkColor && 'black-text'}`}>Copy</button>
                     </div>
