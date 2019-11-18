@@ -119,6 +119,18 @@ class NewPaletteForm extends Component {
         this.setState({ currentColor: newColor.hex })
     }
 
+    savePalette = () => {
+        let newName = this.state.newName;
+        const newPalette = {
+            paletteName: newName,
+            id: newName.toLocaleLowerCase().replace(/ /g, "-"),
+            emoji: 'PK',
+            colors: this.state.colors
+        };
+        this.props.savePalette(newPalette);
+        this.props.history.push('/');
+    }
+
 
     componentDidMount() {
         // custom rule will have name 'isColorNameUnique'
@@ -146,6 +158,7 @@ class NewPaletteForm extends Component {
                 <CssBaseline />
                 <AppBar
                     position="fixed"
+                    color="default"
                     className={clsx(classes.appBar, {
                         [classes.appBarShift]: this.state.isDrawerOpen,
                     })}
@@ -163,6 +176,7 @@ class NewPaletteForm extends Component {
                         <Typography variant="h6" noWrap>
                             Persistent drawer
               </Typography>
+                        <Button variant='contained' color='primary' onClick={this.savePalette}>Save Palette</Button>
                     </Toolbar>
                 </AppBar>
                 <Drawer
@@ -207,11 +221,6 @@ class NewPaletteForm extends Component {
                         >Add Color</Button>
 
                     </ValidatorForm>
-
-
-
-
-
 
                 </Drawer>
                 <main
