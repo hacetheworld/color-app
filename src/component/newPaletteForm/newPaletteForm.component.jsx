@@ -119,7 +119,11 @@ class NewPaletteForm extends Component {
 
         this.setState({ currentColor: newColor.hex })
     }
-
+    deletePalette = (colorName) => {
+        this.setState({
+            colors: this.state.colors.filter(color => color.name !== colorName)
+        })
+    }
     savePalette = () => {
         let newName = this.state.newPaletteName;
         const newPalette = {
@@ -254,7 +258,7 @@ class NewPaletteForm extends Component {
 
 
 
-                    {this.state.colors.map(color => (<DraggableColorBox color={color.color} name={color.name} />
+                    {this.state.colors.map(color => (<DraggableColorBox color={color.color} name={color.name} handleClick={() => this.deletePalette(color.name)} />
                     ))}
 
 
