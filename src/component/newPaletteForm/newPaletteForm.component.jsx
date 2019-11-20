@@ -91,7 +91,7 @@ class NewPaletteForm extends Component {
             currentColor: 'teal',
             newColorName: "",
             newPaletteName: '',
-            colors: [{ color: 'blue', name: 'blue' }]
+            colors: this.props.palettes[0].colors
         }
     }
     addNewColor = () => {
@@ -119,6 +119,24 @@ class NewPaletteForm extends Component {
     changeColor = (newColor) => {
 
         this.setState({ currentColor: newColor.hex })
+    }
+
+    addRandomColor = () => {
+
+        const allColors = this.props.palettes.map(p => p.colors).flat();
+
+        let rand = Math.floor(Math.random() * allColors.length);
+
+        const RandColor = allColors[rand]
+        if (this.state.colors.length < 19) {
+            this.setState({ colors: [...this.state.colors, RandColor] })
+        } else {
+            alert('You have reached the limit')
+        }
+    }
+    clearPalette = () => {
+        this.setState({ colors: [] })
+
     }
     deletePalette = (colorName) => {
         this.setState({
@@ -230,8 +248,8 @@ class NewPaletteForm extends Component {
 
                     <Typography variant='h4'>Design Your Palette</Typography>
                     <div>
-                        <Button variant='contained' color='secondary'>Clear Palette</Button>
-                        <Button variant='contained' color='primary'>Random Color</Button>
+                        <Button variant='contained' color='secondary' onClick={this.clearPalette}>Clear Palette</Button>
+                        <Button variant='contained' color='primary' onClick={this.addRandomColor}>Random Color</Button>
                     </div>
 
 
