@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import DraggableColorBox from './dragable.component'
+import DraggableColorList from './draggableColorList.component';
+
 import clsx from 'clsx';
 
 import { withStyles } from '@material-ui/core/styles';
@@ -15,9 +16,9 @@ import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import Button from '@material-ui/core/Button';
 
-
 import { ChromePicker } from 'react-color';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
+import arrayMove from 'array-move';
 
 
 
@@ -124,6 +125,13 @@ class NewPaletteForm extends Component {
             colors: this.state.colors.filter(color => color.name !== colorName)
         })
     }
+    onSortEnd = ({ oldIndex, newIndex }) => {
+        this.setState(({ colors }) => ({
+            colors: arrayMove(colors, oldIndex, newIndex),
+        }));
+
+    }
+
     savePalette = () => {
         let newName = this.state.newPaletteName;
         const newPalette = {
@@ -256,12 +264,13 @@ class NewPaletteForm extends Component {
                 >
                     <div className={classes.drawerHeader} />
 
+                    <DraggableColorList
+                        colors={this.state.colors}
+                        deletePalette={this.deletePalette}
+                        axis="xy"
+                        onSortEnd={this.onSortEnd}
 
-
-                    {this.state.colors.map(color => (<DraggableColorBox color={color.color} name={color.name} handleClick={() => this.deletePalette(color.name)} />
-                    ))}
-
-
+                    />
 
                 </main>
             </div >
